@@ -8,6 +8,7 @@ var cityName;
 var weatherHeading;
 var temperature;
 var humidity;
+var wind;
 
 $('#refresh-btn').on('click', function() {
     localStorage.removeItem('weatherHistory');
@@ -56,12 +57,18 @@ function displayWeather(cityName) {
         temperature = $('<p>').text(
             'Temperature: ' + Math.round(response.main.temp) + '°F'
         );
-
+        // Humidity
         humidity = $('<p>').text(
             'Humidity: ' + response.main.humidity + '%'
         );
+        // Wind
+        wind = $('<p>').text(
+            'Wind Speed: ' + Math.round(response.wind.speed) + 'mph'
+        )
         
-        
+        //Append to html
+        $('#weatherForCity').append(temperature, humidity, wind);
+
 
         
     });
@@ -70,7 +77,7 @@ function displayWeather(cityName) {
         url: forecastApi,
         method: 'GET'
     }).then(function(response) {
-
+        $
 
 
     });
@@ -107,5 +114,6 @@ function displayHistory() {
 }
 
 function getUVIndex (lat, long) {
-    console.log(lat, long)
+    console.log(lat, long);
+
 }
