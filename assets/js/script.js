@@ -5,6 +5,15 @@ const apiKey = '03980b537ca60f266b837f5334942ed2';
 var userInput = $('#cityInput');
 var cityName;
 
+var weatherHeading;
+var temperature;
+var humidity;
+
+$('#refresh-btn').on('click', function() {
+    localStorage.removeItem('weatherHistory');
+    location.reload();
+});
+
 $('#submit-btn').on('click', function() {
     if (userInput.val() === null) {
         return;
@@ -28,7 +37,7 @@ function displayWeather(cityName) {
     var weatherApi = 
     'https://api.openweathermap.org/data/2.5/weather?q=' +
     cityName +
-    '&units=imperial&appid=' +
+    '&units=imperial&appid=' + 
     apiKey;
 
     $.ajax({
@@ -37,6 +46,24 @@ function displayWeather(cityName) {
     }).then(function(response) {        
         console.log(response);
         getUVIndex(response.coord.lat, response.coord.lon);
+        
+        // show name of city
+        weatherHeading = $('<h4>').text(cityName);
+        var myCityTitle = $('#cityTitle');
+        myCityTitle.append(weatherHeading);
+
+        // Temperature of 'city'
+        temperature = $('<p>').text(
+            'Temperature: ' + Math.round(response.main.temp) + '°F'
+        );
+
+        humidity = $('<p>').text(
+            'Humidity: ' + response.main.humidity + '%'
+        );
+        
+        
+
+        
     });
 
     $.ajax({
@@ -44,7 +71,15 @@ function displayWeather(cityName) {
         method: 'GET'
     }).then(function(response) {
 
+
+
     });
+
+    // Append City Name to HTML
+
+
+
+    
 }
 
 function createHistoryItem (cityName) {

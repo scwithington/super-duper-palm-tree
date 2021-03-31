@@ -4,4 +4,33 @@ nav h1 {
     text-align: center;
 }
 
-#search-bar
+.row {
+    display: flex;
+    
+}
+
+#search-bar {
+    padding: 12px;
+    background-color: lightgray;
+    width: 25%;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+#cityInput {
+    margin-bottom: 5px;
+}
+
+#submit-btn {
+    background-color: lightgreen;
+    color: white;
+    border-color: green;
+    border-radius: 4px;
+}
+
+#refresh-btn {
+    background-color: rgb(255, 98, 98);
+    color: white;
+    border-color: rgb(190, 27, 27);
+    border-radius: 4px;
+}
