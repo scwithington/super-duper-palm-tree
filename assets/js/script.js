@@ -77,8 +77,42 @@ function displayWeather(cityName) {
         url: forecastApi,
         method: 'GET'
     }).then(function(response) {
-        $
+        $('#forecastName').text('5 Day Forecast');
+        for(var i = 1; i < forecastLength; i++) {
+            var card = $("<div class='forecastCard'>");
+            
+            // unix timestamp 
+            var sec = response.daily[i];
+            var mS = sec * 1000;
+            var date = new Date(mS);
+            var dayOfWeek = date.toLocaleString('en-US', { weekday: 'long'});
 
+            var fCardHeader = $('h4');
+            fCardHeader.text(dayOfWeek);
+            
+            // Getting icon and appending
+            var icon = $('<img>');
+            icon.attr(
+                'src', "http://openweathermap.org/img/wn/" +
+                response.daily[i].weather[0].icon +
+                ".png"
+            );
+            var iconCase = ('<p>').text='please show up';
+            
+            iconCase.append(icon);
+
+            var cardTemp = $('<p>').text(
+                'Temp:' + Math.round(response.daily[i].temp.day)
+            );
+            
+            
+            
+            forecastCard.append (
+                fCardHeader, iconCase, cardTemp
+            );
+        
+            $('#forecast').append(card);
+        }
 
     });
 
